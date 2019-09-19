@@ -2,6 +2,9 @@ package com.chinasofti.servles;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,5 +70,43 @@ public class UserF {
 		}
         return "0";
         }
-
+	
+	
+	
+	
+//	登录
+//	注册功能
+	@RequestMapping("/login")
+	@ResponseBody
+        public String login(String username,String password,HttpSession session){
+		System.out.println("username:"+username);
+		System.out.println("password:"+password);
+		AjiaUserExample login = new AjiaUserExample();//登陆功能
+		Criteria loginCriteria = login.createCriteria();
+		loginCriteria.andUsernameEqualTo(username).andPasswordEqualTo(password);
+		List<AjiaUser> list = mapper.selectByExample(login);
+		if(list.isEmpty()){
+			return "1";  //不成功
+			}else{
+			session.setAttribute("username", username);
+			session.setAttribute("userid", list.get(0).getId());
+		    return "0";  //成功
+			}
+	        }
+		
+	
+	@RequestMapping("/Usernamelogin")
+	@ResponseBody
+	 public String Usernamelogin(Model model,AjiaUser ajiaUser){
+		AjiaUserExample ajiaUserExample = new AjiaUserExample();
+		Criteria createCriteria = ajiaUserExample.createCriteria();
+		createCriteria.andUsernameEqualTo(ajiaUser.getUsername());
+        List<AjiaUser> selectByExample = mapper.selectByExample(ajiaUserExample);
+        if(selectByExample.isEmpty()){
+         System.out.println("fail:"+ajiaUser.getUsername());
+		return "0";//没有这个用户
+		}
+        System.out.println("success:"+ajiaUser.getUsername());
+        return "1";//有这个用户
+        }
 }

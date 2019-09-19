@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -22,7 +22,7 @@
 </header>
 <div id="container">
     <div id="cover" class="rt"  style="height: 360px">
-        <form id="login-form" action="loginn" method="get"  >
+    <!--     <form id="login-form"  method="get"  > -->
             <div class="txt" style="height: 360px">
                 <p>登录学子商城
                     <span>
@@ -81,7 +81,7 @@
                 </div>
                 <input class="button_login" type="submit" value="登录" id="bt-login" />
             </div>
-        </form>
+     <!--    </form> -->
     </div>
 </div>
 <!--错误提示-->
@@ -190,24 +190,34 @@
     })
  
 
+    
+    
 $("#username").blur(function(){
-	var data = $("#username").val();
-    if (data == null || data == "") {
+	
+	var name = $("#username").val();
+	
+    if (name == null || name == "") {
         $("#showResult").text("用户名不能为空！");
         $("#showResult").css("color","red");
         return false;
     }
-	//创建xmlHttpRequest对象
-	var xhr= new XMLHttpRequest();
-	//获得用户名的内容
-	var username= $("#username").val();
-	//初始化连接
-	xhr.open("GET","Return.do?username="+username,true);
-	//发送请求
-	xhr.send(null);
-	//处理服务发送的数据回显
-		//注册状态改变的时间
-		xhr.onreadystatechange=function(){
+    $.ajax({
+    	type:"post",
+    	url:"user/Usernamelogin",
+    	async:true,
+		dataType:"json",
+		data:{username:name },
+		success:function(data){
+	 		 if(data=="0"){
+	 			$("#showResult").text("该用户名不存在");
+	 	        $("#showResult").css("color","red");
+			}else if(data=="1"){
+				$("#showResult").text("用户名正确");
+		        $("#showResult").css("color","green");
+			} 
+		}
+	});
+/* 		xhr.onreadystatechange=function(){
 			//处理响应的结果---判断服务器是否已经将数据响应到浏览器
 			if(xhr.readyState==4){
 				//获得响应的内容
@@ -220,44 +230,42 @@ $("#username").blur(function(){
 					 $("#showResult").text("该用户名不存在");
 	                 $("#showResult").css("color","red");
 				}
-				
 			}
-		}
+	  } */
 });
 
 $("#password").blur(function(){
 	var username= $("#username").val();
-	var data = $("#password").val();
-    if (data == null || data == "") {
+	var password = $("#password").val();
+    if (password == null || password == "") {
         $("#showResult1").text("密码不能为空！");
         $("#showResult1").css("color","red");
         return false;
     }
-	//创建xmlHttpRequest对象
-	var xhr= new XMLHttpRequest();
-	//获得用户名的内容
-	var password= $("#password").val();
-	//初始化连接
-	xhr.open("GET","ReturnPassword.do?password="+password+"&username="+username,true);
-	//发送请求
-	xhr.send(null);
-	//处理服务发送的数据回显
-		//注册状态改变的时间
-		xhr.onreadystatechange=function(){
-			//处理响应的结果---判断服务器是否已经将数据响应到浏览器
-			if(xhr.readyState==4){
-				//获得响应的内容
-				var result=  xhr.responseText;
-				//0 表示用户存在，1表示不存在
-				if(result=="0"){
-					 $("#showResult1").text("密码正确 ");
-					 $("#showResult1").css("color","green");
-				}else{
-					 $("#showResult1").text("密码错误");
-	                 $("#showResult1").css("color","red");
-				}
-			}
+});
+
+
+
+$("#bt-login").click(function(){
+	var username= $("#username").val();
+	var password = $("#password").val();
+    $.ajax({
+    	type:"post",
+    	url:"user/login",
+    	async:true,
+		dataType:"json",
+		data:{username:username,password:password },
+		success:function(data){
+	 		if(data==0){
+	 			window.location="index.jsp";
+			}else if(data==1){
+				$("#showResult1").text("密码不正确");
+                $("#showResult1").css("color","red");
+			} 
 		}
+		
+
+	});
 });
 
 /*     $("#username").blur(function(){

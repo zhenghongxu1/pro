@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -11,7 +11,6 @@
 <body>
 <!-- 页面顶部-->
 <header id="top" >
-   
     <div id="logo" class="lf"  >
         <img  src="../images/header/logo.png" alt="logo"/>
     </div>
@@ -48,7 +47,7 @@
 				</style>
    		      <%}else{%> --%>
    		    <li >
-            <a href="login.jsp">登录</a>
+            <a href="login.jsp">${username }</a>
             </li>
       <%--     <% }%> --%>
             

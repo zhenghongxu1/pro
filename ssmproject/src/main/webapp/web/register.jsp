@@ -48,7 +48,7 @@
         <div class="form-group">
           <label for="password">登录密码：</label>
           <input required type="password" minlength="6" maxlength="12" placeholder="请输入密码" name="password" autofocus id="password"/>
-          <span id="msg-default" class="msg-default hidden">密码长度在6到12位之间</span>
+          <span id="password1" id="msg-default" class="msg-default hidden">密码长度在6到12位之间</span>
         </div>
         <div class="form-group">
           <label for="email">邮箱：</label>
@@ -142,7 +142,18 @@
       var password = document.getElementById("password");
       var email = document.getElementById("email");
       var phone = document.getElementById("phone");
-  	window.location.href="user/register?username="+username.value+"&password="+password.value+"&email="+email.value+"&phone="+phone.value;
+      var a= $("#username1").html();
+      var b= $("#password1").html();
+      var c= $("#phone1").html();
+      var d= $("#email1").html();
+      
+	  	if(a=="用户名格式正确"&&b=="密码格式正确"&&c=="手机号格式正确"&&d=="邮箱格式正确")
+	  	{
+	  		window.location.href="user/register?username="+username.value+"&password="+password.value+"&email="+email.value+"&phone="+phone.value;
+	  	}else{
+	  		alert("信息输入有误！");
+	  	}
+  	
   })
 </script>
 <script>
@@ -180,7 +191,6 @@
       }
     }
   }
-
   username.onfocus = function(){
     this.nextElementSibling.innerHTML = '用户名长度在6到9位之间';
     this.nextElementSibling.className = 'msg-default';
@@ -282,8 +292,6 @@
       if(!data){   //用户没有输入任何内容
         return;
       }
-     
-
     }
   }
   phone.onfocus = function(){

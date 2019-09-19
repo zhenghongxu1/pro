@@ -23,7 +23,7 @@ public class AddressController {
 		System.out.println(shipping);
 		model.addAttribute("shipping", shipping);
 		
-		return "/index.jsp";
+		return "/index1.jsp";
 		
 	}
 	@RequestMapping("/insertOne")

@@ -22,7 +22,7 @@ public class AddressController {
 		AjiaShipping shipping = mapper.selectByPrimaryKey(1l);
 		System.out.println(shipping);
 		model.addAttribute("shipping", shipping);
-		
+		//aa
 		return "/index.jsp";
 		
 	}

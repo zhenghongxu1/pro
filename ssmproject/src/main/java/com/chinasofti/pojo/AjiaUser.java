@@ -1,6 +1,7 @@
 package com.chinasofti.pojo;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class AjiaUser implements Serializable {
@@ -204,7 +205,7 @@ public class AjiaUser implements Serializable {
      * @mbg.generated Wed Sep 11 17:20:26 CST 2019
      */
     public Date getCreated() {
-        return created;
+        return created=new Timestamp(System.currentTimeMillis());
     }
 
     /**

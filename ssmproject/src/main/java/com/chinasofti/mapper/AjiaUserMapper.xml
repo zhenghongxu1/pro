@@ -148,11 +148,9 @@
       This element was generated on Wed Sep 11 17:20:26 CST 2019.
     -->
     insert into ajia_user (id, username, password, 
-      phone, email, created, 
-      updated)
+      phone, email, created)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
-      #{updated,jdbcType=TIMESTAMP})
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.chinasofti.pojo.AjiaUser">
     <!--
@@ -180,9 +178,6 @@
       <if test="created != null">
         created,
       </if>
-      <if test="updated != null">
-        updated,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -202,9 +197,6 @@
       </if>
       <if test="created != null">
         #{created,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updated != null">
-        #{updated,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>

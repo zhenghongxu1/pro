@@ -10,7 +10,7 @@ import com.chinasofti.server.UserDaoServer;
 @Controller
 @RequestMapping("/user")
 public class controllerimple {
-//这里是测试以下冲突的表现
+//杩欓噷鏄祴璇曚互涓嬪啿绐佺殑琛ㄧ幇1
 	@Autowired
 	UserDaoServer dao;
 	@RequestMapping("/register")
